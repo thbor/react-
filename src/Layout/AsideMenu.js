@@ -15,13 +15,13 @@ class AsideMenu extends React.Component{
       style:props.style,
       leftWidth:'200px'
     }
+    this.setState({leftWidth:props.collapse?'200px':'60px'})
   }
   handleClick(e){
     this.props.history.push(e.key)
   }
   render(){
     const menuStyle=this.props.style
-    this.setState({leftWidth:this.props.collapse?'200px':'60px'})
     const Menuinfo = menus.map(item=>
       <SubMenu key={item.id} title={<span>{this.props.collapse?item.name:item.hidename}</span>} >
         {item.children.map(item2=>
