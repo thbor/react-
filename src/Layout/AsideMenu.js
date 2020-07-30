@@ -13,9 +13,8 @@ class AsideMenu extends React.Component{
     this.handleClick = this.handleClick.bind(this)
     this.state={
       style:props.style,
-      leftWidth:'200px'
+      leftWidth:props.collapse?'200px':'60px'
     }
-    this.setState({leftWidth:props.collapse?'200px':'60px'})
   }
   handleClick(e){
     this.props.history.push(e.key)

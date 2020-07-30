@@ -15,9 +15,17 @@ class Playout extends React.Component{
     
   }
   getCollapse(collapse){
-    this.setState({collapse:collapse})
-    this.setState({LeftWidth:collapse?'200px':'60px'})
-    this.setState({rightWidth:collapse?'calc(100% - 200px)':'calc(100% - 60px)'})
+    
+    // this.setState({collapse:collapse})
+    // this.setState({LeftWidth:collapse?'200px':'60px'})
+    // this.setState({rightWidth:collapse?'calc(100% - 200px)':'calc(100% - 60px)'})
+    //FIXME: state(状态)更新可能是异步的,React 为了优化性能，有可能会将多个 setState() 调用合并为一次更新。
+    this.setState((state,props)=>
+    ({
+      collapse:collapse,
+      LeftWidth:collapse?'200px':'60px',
+      rightWidth:collapse?'calc(100% - 200px)':'calc(100% - 60px)'
+    }))
     this.props.getCollapseLayout(collapse)
   }
   render(){
@@ -26,7 +34,8 @@ class Playout extends React.Component{
       height:'calc(100vh - 60px)',
       width:this.state.LeftWidth,
       position:'absolute',
-      top:'60px'
+      top:'60px',
+      overFlow:'hidden'
     }
     const mainStyle={
       background:'#eff1f4',
@@ -35,7 +44,7 @@ class Playout extends React.Component{
       width:this.state.rightWidth,
       position:'absolute',
       left:this.state.LeftWidth,
-      padding:'20px',
+      // padding:'20px',
       top:'60px'
     }
     const topStyle={
@@ -43,7 +52,7 @@ class Playout extends React.Component{
       lineHeight:'60px',
       backgroundColor:'white',
       position:'absolute',
-      width:'100vw',
+      width:'100%',
       background: 'linear-gradient(90deg,#4a66f2,#54bbf2)',
     }
     return(
